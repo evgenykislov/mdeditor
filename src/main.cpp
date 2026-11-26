@@ -6,12 +6,9 @@
 #include "gui/main_window.h"
 
 int main(int argc, char* argv[]) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // The window looks the same on screens with a high density of pixels.
-    // Qt 6 does this by itself.
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-#endif
     // The names tell the settings of the program where they belong.
     QCoreApplication::setOrganizationName(QStringLiteral("mdeditor"));
     QCoreApplication::setApplicationName(QStringLiteral("mdeditor"));

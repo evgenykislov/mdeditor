@@ -16,9 +16,9 @@ endif()
 include(CTest)
 include(GNUInstallDirs)
 
-# Qt 6 is preferred. Qt 5.15 or newer is used when Qt 6 is not installed.
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} 5.15 REQUIRED COMPONENTS Widgets)
+# Qt 5.15 is the oldest version whose rich text engine knows Markdown
+# structures that the preview is made of.
+find_package(Qt5 5.15 REQUIRED COMPONENTS Widgets)
 
 # Applies the compiler settings that are common for all the targets.
 function(mdeditor_configure_target target)
@@ -57,7 +57,7 @@ add_library(mdeditor_core STATIC
     src/core/rich_text_document.h
 )
 target_include_directories(mdeditor_core PUBLIC src)
-target_link_libraries(mdeditor_core PUBLIC Qt${QT_VERSION_MAJOR}::Gui)
+target_link_libraries(mdeditor_core PUBLIC Qt5::Gui)
 mdeditor_configure_target(mdeditor_core)
 
 # The window of the program and its panels.
@@ -70,7 +70,7 @@ add_library(mdeditor_gui STATIC
     src/gui/markdown_preview.cpp
     src/gui/markdown_preview.h
 )
-target_link_libraries(mdeditor_gui PUBLIC mdeditor_core Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(mdeditor_gui PUBLIC mdeditor_core Qt5::Widgets)
 target_compile_definitions(mdeditor_gui PUBLIC MDEDITOR_VERSION="${PROJECT_VERSION}")
 mdeditor_configure_target(mdeditor_gui)
 

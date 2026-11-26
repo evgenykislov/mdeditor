@@ -1,9 +1,9 @@
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Test)
+find_package(Qt5 REQUIRED COMPONENTS Test)
 
 # Builds a test program and registers it in CTest.
 function(mdeditor_add_test name library)
     add_executable(${name} ${ARGN})
-    target_link_libraries(${name} PRIVATE ${library} Qt${QT_VERSION_MAJOR}::Test)
+    target_link_libraries(${name} PRIVATE ${library} Qt5::Test)
     mdeditor_configure_target(${name})
     add_test(NAME ${name} COMMAND ${name})
     # The tests do not need a display, so they also run where there is none,
